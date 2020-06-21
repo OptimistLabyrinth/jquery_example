@@ -5,33 +5,42 @@ $(document).ready(function() {
 function FlatToHierarchyExample() {
   var raw_data =
   [
-    { name:"A",         key:"65",           parent_key:"" },
-    { name:"B",         key:"66",           parent_key:"" },
-    { name:"C",         key:"67",           parent_key:"" },
-    { name:"AA",        key:"6565",         parent_key:"65" },
-    { name:"AB",        key:"6566",         parent_key:"65" },
-    { name:"AC",        key:"6567",         parent_key:"65" },
-    { name:"AD",        key:"6568",         parent_key:"65" },
-    { name:"BA",        key:"6665",         parent_key:"66" },
-    { name:"BB",        key:"6666",         parent_key:"66" },
-    { name:"BC",        key:"6667",         parent_key:"66" },
-    { name:"CA",        key:"6765",         parent_key:"67" },
-    { name:"CB",        key:"6766",         parent_key:"67" },
-    { name:"AAA",       key:"656565",       parent_key:"6565" },
-    { name:"AAB",       key:"656566",       parent_key:"6565" },
-    { name:"AAC",       key:"656567",       parent_key:"6565" },
-    { name:"AAA1",      key:"6565651",      parent_key:"656565" },
-    { name:"AAA2",      key:"6565652",      parent_key:"656565" },
-    { name:"AAA3",      key:"6565653",      parent_key:"656565" },
-    { name:"CBA",       key:"676665",       parent_key:"6766" },
-    { name:"CBB",       key:"676666",       parent_key:"6766" },
-    { name:"CBA1",      key:"6766651",      parent_key:"676665" },
-    { name:"CBA2",      key:"6766652",      parent_key:"676665" },
-    { name:"CBA3",      key:"6766653",      parent_key:"676665" },
-    { name:"CBB1",      key:"6766661",      parent_key:"676666" },
-    { name:"CBB2",      key:"6766662",      parent_key:"676666" },
-    { name:"CBB2A",     key:"676666265",    parent_key:"6766662" },
-    { name:"CBB2B",     key:"676666266",    parent_key:"6766662" },
+    { name:"A",               key:"65",                   parent_key:"" },
+    { name:"B",               key:"66",                   parent_key:"" },
+    { name:"C",               key:"67",                   parent_key:"" },
+    { name:"AA",              key:"6565",                 parent_key:"65" },
+    { name:"AB",              key:"6566",                 parent_key:"65" },
+    { name:"AC",              key:"6567",                 parent_key:"65" },
+    { name:"AD",              key:"6568",                 parent_key:"65" },
+    { name:"BA",              key:"6665",                 parent_key:"66" },
+    { name:"BB",              key:"6666",                 parent_key:"66" },
+    { name:"BC",              key:"6667",                 parent_key:"66" },
+    { name:"CA",              key:"6765",                 parent_key:"67" },
+    { name:"CB",              key:"6766",                 parent_key:"67" },
+    { name:"AAA",             key:"656565",               parent_key:"6565" },
+    { name:"AAB",             key:"656566",               parent_key:"6565" },
+    { name:"AAC",             key:"656567",               parent_key:"6565" },
+    { name:"AAA1",            key:"6565651",              parent_key:"656565" },
+    { name:"AAA2",            key:"6565652",              parent_key:"656565" },
+    { name:"AAA3",            key:"6565653",              parent_key:"656565" },
+    { name:"CBA",             key:"676665",               parent_key:"6766" },
+    { name:"CBB",             key:"676666",               parent_key:"6766" },
+    { name:"CBA1",            key:"6766651",              parent_key:"676665" },
+    { name:"CBA2",            key:"6766652",              parent_key:"676665" },
+    { name:"CBA3",            key:"6766653",              parent_key:"676665" },
+    { name:"CBB1",            key:"6766661",              parent_key:"676666" },
+    { name:"CBB2",            key:"6766662",              parent_key:"676666" },
+    { name:"CBB2A",           key:"676666265",            parent_key:"6766662" },
+    { name:"CBB2B",           key:"676666266",            parent_key:"6766662" },
+    { name:"CBB2BA",          key:"67666626665",          parent_key:"676666266" },
+    { name:"CBB2BB",          key:"67666626666",          parent_key:"676666266" },
+    { name:"CBB2BC",          key:"67666626667",          parent_key:"676666266" },
+    { name:"CBB2BD",          key:"67666626668",          parent_key:"676666266" },
+    { name:"CBB2BDA",         key:"6766662666865",        parent_key:"67666626668" },
+    { name:"CBB2BDB",         key:"6766662666866",        parent_key:"67666626668" },
+    { name:"CBB2BDA1",        key:"67666626668651",       parent_key:"6766662666865" },
+    { name:"CBB2BDA2",        key:"67666626668652",       parent_key:"6766662666865" },
+    { name:"CBB2BDA3",        key:"67666626668653",       parent_key:"6766662666865" },
   ];
 
   const flat_data = JSON.parse(JSON.stringify(raw_data));
@@ -140,10 +149,10 @@ function FlatToHierarchyExample() {
     2: "CB",
     3: "CBB",
     4: "CBB2",
-    5: "CBB2A",
-    6: "None",
-    7: "None",
-    8: "None",
+    5: "CBB2B",
+    6: "CBB2BD",
+    7: "CBB2BDA",
+    8: "CBB2BDA3",
   };
 
   for (var i = 1; i <= 8; ++i) {
@@ -213,6 +222,9 @@ function FlatToHierarchyExample() {
     for (var i = (N + 1); i <= 8; ++i) {
       SetDefaultSelect($("#dept" + i));
     }
+    if (N === 8) {
+      return true;
+    }
     for (var i = 0; i < tree_data[N].length; ++i) {
       const node = tree_data[N][i];
       if (node.name === current_select[N]) {
@@ -223,7 +235,6 @@ function FlatToHierarchyExample() {
         break;
       }
     }
-    $("#dept" + N).select().val(current_select[N]);
   }
 
   function SetDefaultSelect(select_html_element) {
