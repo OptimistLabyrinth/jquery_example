@@ -1,8 +1,8 @@
 $(document).ready(function() {
-  TestJavascript();
+  FlatToHierarchyExample();
 });
 
-function TestJavascript() {
+function FlatToHierarchyExample() {
   var raw_data =
   [
     { name:"A",         key:"65",           parent_key:"" },
